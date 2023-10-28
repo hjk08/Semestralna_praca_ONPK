@@ -56,6 +56,11 @@ resource "openstack_compute_instance_v2" "instance" {
   security_groups = [openstack_networking_secgroup_v2.security_group.name]
   
   network {
+    count = var.want_public_inteface ? 1 : 0
+    name = var.public_network_name
+  }
+  
+  network {
     name = var.private_network_name
     fixed_ip_v4 = var.static_ip
   }

@@ -32,3 +32,8 @@ variable "public_network_name"{
 variable "static_ip" {
   type = string
 }
+
+variable "want_public_inteface" {
+  type = bool
+  default = false
+}

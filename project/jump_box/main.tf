@@ -24,5 +24,7 @@ module "instance" {
   keypair               = openstack_compute_keypair_v2.keypair.name
   my_public_ip          = data.http.my_public_ip.response_body
   private_network_name  = module.network.private_network_name
+  want_public_inteface  = true
+  public_network_name   = module.network.public_network_name
 }
 
