@@ -19,3 +19,8 @@ variable "my_public_ip" {
 variable "sec_group_name"{
   type = string
 }
+
+variable "want_public_network" {
+  type = bool
+  default = false
+}
