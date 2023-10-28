@@ -11,17 +11,17 @@ resource "openstack_compute_keypair_v2" "keypair" {
 
 module "network" {
   source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/network"
-  want_public-network   = true
-  sec_group_name        = "jump_sec_gr"
+  want_public_network   = true
   private_network_name  = "local_private"
   subnet_cidr           = "10.0.0.0/24"
   static_ip             = "10.0.0.42"
 }
 
 module "instance" {
-  source        = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
-  instance_name = "jump_box"
-  keypair       = openstack_compute_keypair_v2.keypair.name
-  my_public_ip  = http.my_public_ip.url 
+  source          = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
+  instance_name   = "jump_box"
+  sec_group_name  = "jump_sec_gr"
+  keypair         = openstack_compute_keypair_v2.keypair.name
+  my_public_ip    = http.my_public_ip.url 
 }
 
