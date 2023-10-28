@@ -17,4 +17,8 @@ locals {
   project= lower("${var.tenant_name}-minikube")
 
   my_public_ip = "${data.http.my_public_ip.response_body}/32"
+
+  source_compute = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
+
+  source_network = "github.com/hjk08/Semstralna_praca_ONPK/modules/network"
 }
