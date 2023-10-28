@@ -11,3 +11,11 @@ variable "instance_name" {
 variable "keypair"{
   type = string
 }
+
+variable "my_public_ip" {
+  type = string
+}
+
+variable "sec_group_name"{
+  type = string
+}
