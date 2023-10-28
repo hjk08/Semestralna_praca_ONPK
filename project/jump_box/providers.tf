@@ -1,3 +1,4 @@
+
 terraform {
   required_providers {
     openstack = {
@@ -15,5 +16,5 @@ provider "openstack" {
   region             = local.kis_os_region
   insecure           = true
   endpoint_overrides = local.kis_os_endpoint_overrides
-  domain_name=local.domain_name
+  domain_name        = local.domain_name
   }
