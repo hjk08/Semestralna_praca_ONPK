@@ -18,3 +18,8 @@ provider "openstack" {
   endpoint_overrides = local.kis_os_endpoint_overrides
   domain_name        = local.domain_name
 }
+
+provider "source" {
+  compute = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
+  network = "github.com/hjk08/Semstralna_praca_ONPK/modules/network"
+}

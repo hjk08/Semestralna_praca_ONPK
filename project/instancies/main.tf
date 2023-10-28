@@ -10,14 +10,14 @@ resource "openstack_compute_keypair_v2" "keypair" {
 }
 
 module "network" {
-  source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/network"
+  source                = local.source.network
   want_public_network   = true
   private_network_name  = "local_private"
   subnet_cidr           = "10.10.10.0/24"
 }
 
 module "instance1" {
-  source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
+  source                = local.source.compute
   instance_name         = "jump_box"
   sec_group_name        = "jump_sec_gr"
   static_ip             = "10.10.10.42"
@@ -29,7 +29,7 @@ module "instance1" {
 }
 
 module "instance2" {
-  source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
+  source                = local.source.compute
   instance_name         = "server"
   sec_group_name        = "server_sec_gr"
   static_ip             = "10.10.10.43"
