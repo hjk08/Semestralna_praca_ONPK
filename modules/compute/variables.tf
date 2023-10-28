@@ -28,3 +28,7 @@ variable "public_network_name"{
   type = string
   default = ""
 }
+
+variable "static_ip" {
+  type = string
+}

@@ -9,10 +9,6 @@ variable "private_network_name" {
   type    = string
 }
 
-variable "static_ip" {
-  type = string
-}
-
 variable "subnet_cidr" {
   type      = string
 }

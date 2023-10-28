@@ -57,5 +57,6 @@ resource "openstack_compute_instance_v2" "instance" {
   
   network {
     name = var.private_network_name
+    fixed_ip_v4 = var.static_ip
   }
 }
