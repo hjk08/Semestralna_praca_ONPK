@@ -5,6 +5,6 @@ variable "network_name" {
   default = "ext-net-154"
 }
 
-variable "instance_name" {
-    type = string
+variable "my_public_ip" {
+  type = string
 }
