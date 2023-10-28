@@ -10,7 +10,7 @@ resource "openstack_compute_keypair_v2" "keypair" {
 }
 
 module "instance" {
-  source        = "https://github.com/hjk08/Semstralna_praca_ONPK/tree/95f088a225f3b1e022704ae4203238deebbcd3c9/modules/compute"
+  source        = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
   //project       = local.project
   //environment   = var.environment
   //my_public_ip  = data.http.my_public_ip.response_body

@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."}]}
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"instance","Source":"git::https://github.com/hjk08/Semstralna_praca_ONPK.git//modules/compute","Dir":".terraform/modules/instance/modules/compute"}]}
