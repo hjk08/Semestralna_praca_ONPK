@@ -1,22 +1,23 @@
 
 
-variable "network_name" {
+variable "public_network_name" {
   type    = string
   default = "ext-net-154"
 }
 
-variable "static_ip" {
-  type = string
-  default = ""
+variable "private_network_name" {
+  type    = string
 }
 
-variable "want_subnet" {
-  description = "If want spec subnet set up to true"
-  type        = bool
-  default     = false
+variable "static_ip" {
+  type = string
 }
 
 variable "subnet_cidr" {
   type      = string
-  default  = ""
+}
+
+variable "want_public_network" {
+  type = bool
+  default = false
 }
