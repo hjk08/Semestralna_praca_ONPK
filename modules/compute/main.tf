@@ -8,10 +8,6 @@ data "openstack_images_image_v2" "image" {
   name = local.image.ubuntu.name
 }
 
-data "openstack_compute_keypair_v2" "keypair" {
-  name = var.keypair
-}
-
 resource "openstack_compute_instance_v2" "instance" {
   name            = "${var.instance_name}"
   image_id        = data.openstack_images_image_v2.image.id
