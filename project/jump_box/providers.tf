@@ -17,4 +17,4 @@ provider "openstack" {
   insecure           = true
   endpoint_overrides = local.kis_os_endpoint_overrides
   domain_name        = local.domain_name
-  }
+}

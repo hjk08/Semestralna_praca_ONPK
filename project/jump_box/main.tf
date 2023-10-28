@@ -22,6 +22,6 @@ module "instance" {
   instance_name   = "jump_box"
   sec_group_name  = "jump_sec_gr"
   keypair         = openstack_compute_keypair_v2.keypair.name
-  my_public_ip    = data.http.my_public_ip.url 
+  my_public_ip    = data.http.my_public_ip.response_body
 }
 
