@@ -7,6 +7,7 @@ variable "network_name" {
 
 variable "static_ip" {
   type = string
+  default = ""
 }
 
 variable "want_subnet" {

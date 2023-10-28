@@ -14,3 +14,7 @@ module "instance" {
   instance_name = "jump_box"
   keypair       = openstack_compute_keypair_v2.keypair.name
 }
+
+module "network" {
+  source = "github.com/hjk08/Semstralna_praca_ONPK/modules/network"
+}
