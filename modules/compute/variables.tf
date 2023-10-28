@@ -20,3 +20,11 @@ variable "sec_group_name"{
   type = string
 }
 
+variable "private_network_name" {
+  type = string
+}
+
+variable "public_network_name"{
+  type = string
+  default = ""
+}

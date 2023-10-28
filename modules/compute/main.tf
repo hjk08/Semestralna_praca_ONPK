@@ -53,13 +53,10 @@ resource "openstack_compute_instance_v2" "instance" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
   key_pair        = var.keypair
- 
- 
- #security_groups = [data.openstack_networking_secgroup_v2.default.name]
+  security_groups = [data.openstack_networking_secgroup_v2.security_group.name]
 
  # user_data = var.user_data
-
-  #network {
-  #  name = var.network_id
-  #}
+  network {
+    name = var.private_network_name
+  }
 }
