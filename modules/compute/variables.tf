@@ -6,7 +6,7 @@ variable "flavor_name" {
 
 variable "image_name" {
   type = string
-  default = local.image.ubuntu.name
+  default = locals.image.ubuntu.name
 }
 
 variable "instance_name" {
