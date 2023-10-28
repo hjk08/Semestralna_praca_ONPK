@@ -55,11 +55,11 @@ resource "openstack_compute_instance_v2" "instance" {
   key_pair        = var.keypair
  
  
- //security_groups = [data.openstack_networking_secgroup_v2.default.name]
+ #security_groups = [data.openstack_networking_secgroup_v2.default.name]
 
- // user_data = var.user_data
+ # user_data = var.user_data
 
-  //network {
-  //  name = var.network_id
-  //}
+  #network {
+  #  name = var.network_id
+  #}
 }
