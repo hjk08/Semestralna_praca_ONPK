@@ -1,6 +1,6 @@
 
 
-variable "network_name" {
+variable "public_network_name" {
   type    = string
   default = "ext-net-154"
 }
