@@ -4,6 +4,15 @@ variable "flavor_name" {
   default = "2c2r20d"
 }
 
+variable "image_name" {
+  type = string
+  default = local.image.ubuntu.name
+}
+
 variable "instance_name" {
+  type = string
+}
+
+variable "keypair"{
   type = string
 }

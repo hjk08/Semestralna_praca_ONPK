@@ -11,10 +11,6 @@ resource "openstack_compute_keypair_v2" "keypair" {
 
 module "instance" {
   source        = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
-  project       = local.project
-  environment   = var.environment
-  my_public_ip  = data.http.my_public_ip.response_body
-  key_pair_name = openstack_compute_keypair_v2.keypair.name
-  flavor_name   = var.flavor_name
-  user_data     = data.cloudinit_config.user_data.rendered
+  instance_name = "jump_box"
+  keypair       = openstack_compute_keypair_v2.keypair.name
 }
