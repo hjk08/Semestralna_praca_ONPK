@@ -55,7 +55,7 @@ resource "openstack_compute_instance_v2" "instance" {
   key_pair        = var.keypair
   security_groups = [openstack_networking_secgroup_v2.security_group.name]
   
-  dinamic network {
+  dynamic network {
     for_each = var.want_public_inteface ? [1] : []
     content {
       name = var.public_network_name
