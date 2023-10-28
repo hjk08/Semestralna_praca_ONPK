@@ -10,4 +10,8 @@ project/private_server/.terraform
 project/jump_box/terraform.auto.tfvars
 project/private_server/terraform.auto.tfvars
 
+project/jump_box/terraform.tfstate
+project/private_server/terraform.tfstate
 
+project/jump_box/terraform.tfstate.backup
+project/private_server/terraform.tfstate.backup
