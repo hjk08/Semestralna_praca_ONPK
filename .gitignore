@@ -1,3 +1,3 @@
-project\erraform.auto.tfvars
-project\terraform.exe
-project\.terraform
+project/erraform.auto.tfvars
+project/terraform.exe
+project/.terraform
