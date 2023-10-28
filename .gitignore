@@ -2,12 +2,12 @@ project/jump_box/terraform.exe
 project/private_server/terraform.exe
 
 
-project/jump-box/.terraform
+project/jump_box/.terraform
 project/private_server/.terraform
 
 
 
-project/jump-box/terraform.auto.tfvars
+project/jump_box/terraform.auto.tfvars
 project/private_server/terraform.auto.tfvars
 
 
