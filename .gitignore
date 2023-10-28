@@ -1,13 +1,13 @@
-#ignore teraform exe in all projects paths
 project/jump_box/terraform.exe
 project/private_server/terraform.exe
 
-#
+
 project/jump-box/.terraform
 project/private_server/.terraform
 
 
-#ignore sensitive informations
+
 project/jump-box/terraform.auto.tfvars
 project/private_server/terraform.auto.tfvars
+
 
