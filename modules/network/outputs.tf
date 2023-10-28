@@ -8,5 +8,5 @@ output "private_network_name" {
 }
 
 output "public_network_name" {
-  value = public_network_name
+  value = var.public_network_name
 }

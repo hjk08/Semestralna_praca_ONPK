@@ -18,10 +18,11 @@ module "network" {
 }
 
 module "instance" {
-  source          = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
-  instance_name   = "jump_box"
-  sec_group_name  = "jump_sec_gr"
-  keypair         = openstack_compute_keypair_v2.keypair.name
-  my_public_ip    = data.http.my_public_ip.response_body
+  source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
+  instance_name         = "jump_box"
+  sec_group_name        = "jump_sec_gr"
+  keypair               = openstack_compute_keypair_v2.keypair.name
+  my_public_ip          = data.http.my_public_ip.response_body
+  private_network_name  = module.network.private_network_name.value 
 }
 
