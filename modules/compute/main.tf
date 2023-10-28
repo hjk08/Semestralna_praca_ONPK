@@ -4,7 +4,7 @@ data "openstack_compute_flavor_v2" "flavor_1" {
 }
 
 data "openstack_images_image_v2" "image_1" {
-  name = local.image.debian.name
+  name = local.image.ubuntu.name
 }
 
 data "openstack_networking_secgroup_v2" "default" {

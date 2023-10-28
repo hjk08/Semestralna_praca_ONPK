@@ -1,9 +1,9 @@
 
 locals {
   image = {
-    debian = {
-      name        = "debian-12-kis"
-      os_username = "debian"
+    ubuntu = {
+      name        = "ubuntu-22.04-kis"
+      os_username = "ubuntu"
     }
   }
 
