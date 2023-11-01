@@ -16,7 +16,7 @@ module "jump_box" {
   tenant_name = var.tenant_name
 }
 
-module "instance1" {
+module "instance2" {
   source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
   instance_name         = "private_server"
   sec_group_name        = "server_sec_gr"
