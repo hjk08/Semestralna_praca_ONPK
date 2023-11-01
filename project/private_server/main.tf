@@ -6,6 +6,9 @@ data "http" "my_public_ip" {
 
 module "jump_box" {
   source      = "github.com/hjk08/Semstralna_praca_ONPK/project/jump_box" 
+  username    = var.username
+  password    = var.password
+  tenant_name = var.tenant_name
 }
 
 module "instance1" {
