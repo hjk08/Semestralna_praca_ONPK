@@ -5,7 +5,7 @@ data "http" "my_public_ip" {
 }
 
 module "jump_box" {
-  source = "value"
+  source = "https://github.com/hjk08/Semstralna_praca_ONPK/tree/09de61308a97fac4a70e0791cf5bc346c4d253e9/project/jump_box"
 }
 
 module "instance" {
@@ -13,7 +13,7 @@ module "instance" {
   instance_name         = "private_server"
   sec_group_name        = "server_sec_gr"
   static_ip             = "10.10.10.43"
-  keypair               = openstack_compute_keypair_v2.keypair.name
+  keypair               = module.jump_box.keypair_name
   my_public_ip          = data.http.my_public_ip.response_body
-  private_network_name  = module.network.private_network_name
+  private_network_name  = module.jump_box.private_network_name
 }
