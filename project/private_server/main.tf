@@ -5,10 +5,10 @@ data "http" "my_public_ip" {
 }
 
 module "jump_box" {
-  source = "github.com/hjk08/Semstralna_praca_ONPK/project/jump_box"
+  source      = "github.com/hjk08/Semstralna_praca_ONPK/project/jump_box" 
 }
 
-module "instance" {
+module "instance1" {
   source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
   instance_name         = "private_server"
   sec_group_name        = "server_sec_gr"
