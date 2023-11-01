@@ -5,7 +5,7 @@ data "http" "my_public_ip" {
 }
 
 data "http" "remote_script" {
-  url = "https://raw.githubusercontent.com/hjk08/Semstralna_praca_ONPK/project/jump_box/scripts/base.sh"
+  url = "https://github.com/hjk08/Semstralna_praca_ONPK/blob/33406bcdc76e7c365a23fd7904b9cd61136d63df/project/jump_box/scripts/base.sh"
 }
 
 resource "openstack_compute_keypair_v2" "keypair" {
