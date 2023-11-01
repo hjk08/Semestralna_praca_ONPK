@@ -45,7 +45,7 @@ data "openstack_compute_flavor_v2" "flavor" {
 }
 
 data "openstack_images_image_v2" "image" {
-  name = local.image.ubuntu.name
+  name = local.image.debian.name
 }
 
 resource "openstack_compute_instance_v2" "instance" {
