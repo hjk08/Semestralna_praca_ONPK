@@ -1,8 +1,8 @@
 # --- network/main.tf --
 
 resource "openstack_networking_network_v2" "network" {
-    name = var.private_network_name
-    admin_state_up = "true"
+    name            = var.private_network_name
+    admin_state_up  = "true"
 }
 
 resource "openstack_networking_subnet_v2" "subnet" {
