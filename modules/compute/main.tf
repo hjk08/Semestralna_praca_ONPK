@@ -60,7 +60,6 @@ resource "openstack_compute_instance_v2" "instance" {
     for_each = var.want_public_inteface ? [1] : []
     content {
       name        = var.public_network_name
-      fixed_ip_v4 = "158.193.154.52"
     }
   }
   
