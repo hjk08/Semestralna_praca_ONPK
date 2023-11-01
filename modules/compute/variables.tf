@@ -1,7 +1,7 @@
 
 variable "flavor_name" {
   type = string
-  default = "2c2r20d"
+  default = "2c4r64d"
 }
 
 variable "instance_name" {
