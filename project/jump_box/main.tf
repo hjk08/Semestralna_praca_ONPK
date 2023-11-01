@@ -16,7 +16,7 @@ module "network" {
   subnet_cidr           = "10.10.10.0/24"
 }
 
-module "instance1" {
+module "instance" {
   source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
   instance_name         = "jump_box"
   sec_group_name        = "jump_sec_gr"
