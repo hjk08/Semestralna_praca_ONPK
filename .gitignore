@@ -1,10 +1,13 @@
-project/instancies/terraform.exe
+#jump box
+project/jump_box/terraform.exe
+project/jump_box/.terraform
+project/jump_box/terraform.auto.tfvars
+project/jump_box/terraform.tfstate
+project/jump_box/terraform.tfstate.backup
 
-project/instancies/.terraform
-
-project/instancies/terraform.auto.tfvars
-
-project/instancies/terraform.tfstate
-
-project/instancies/terraform.tfstate.backup
-
+#private server
+project/private_server/terraform.exe
+project/private_server/.terraform
+project/private_server/terraform.auto.tfvars
+project/private_server/terraform.tfstate
+project/private_server/terraform.tfstate.backup

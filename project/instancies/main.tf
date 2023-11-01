@@ -16,7 +16,7 @@ module "network" {
   subnet_cidr           = "10.10.10.0/24"
 }
 
-module "instance1" {
+module "instance" {
   source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
   instance_name         = "jump_box"
   sec_group_name        = "jump_sec_gr"
@@ -28,7 +28,7 @@ module "instance1" {
   public_network_name   = module.network.public_network_name
 }
 
-module "instance2" {
+/*module "instance2" {
   source                = "github.com/hjk08/Semstralna_praca_ONPK/modules/compute"
   instance_name         = "server"
   sec_group_name        = "server_sec_gr"
@@ -36,4 +36,4 @@ module "instance2" {
   keypair               = openstack_compute_keypair_v2.keypair.name
   my_public_ip          = data.http.my_public_ip.response_body
   private_network_name  = module.network.private_network_name
-}
+}*/
