@@ -5,7 +5,7 @@ data "http" "my_public_ip" {
 }
 
 module "jump_box" {
-  source = "https://github.com/hjk08/Semstralna_praca_ONPK/tree/09de61308a97fac4a70e0791cf5bc346c4d253e9/project/jump_box"
+  source = "github.com/hjk08/Semstralna_praca_ONPK/project/jump_box"
 }
 
 module "instance" {
