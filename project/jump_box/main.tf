@@ -16,7 +16,7 @@ data "cloudinit_config" "user_data"{
   part {
     content_type = "text/x-shellscript"
     filename     = "network_set_up"
-    content      = file()
+    content      = file("github.com/hjk08/Semstralna_praca_ONPK/project/jump_box/scripts/base.sh")
   }
 
 }
