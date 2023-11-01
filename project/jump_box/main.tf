@@ -41,4 +41,5 @@ module "instance" {
   private_network_name  = module.network.private_network_name
   want_public_inteface  = true
   public_network_name   = module.network.public_network_name
+  user_data             = data.cloudinit_config.user_data.rendered
 }

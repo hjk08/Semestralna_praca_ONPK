@@ -37,3 +37,7 @@ variable "want_public_inteface" {
   type = bool
   default = false
 }
+
+variable "user_data" {
+  type = string
+}
