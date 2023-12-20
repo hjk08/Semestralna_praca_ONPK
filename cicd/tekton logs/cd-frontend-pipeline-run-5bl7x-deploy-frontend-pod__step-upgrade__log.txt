@@ -1,0 +1,112 @@
+current installed helm releases
+NAME        	NAMESPACE	REVISION	UPDATED                                	STATUS	CHART             	APP VERSION
+helm-release	default  	1       	2023-12-20 20:55:14.227308125 +0000 UTC	failed	frontend-app-1.0.0	1.0.0      
+installing helm chart...
+history.go:56: [debug] getting history for release helm-release
+upgrade.go:123: [debug] preparing upgrade for helm-release
+upgrade.go:131: [debug] performing update for helm-release
+upgrade.go:303: [debug] creating upgraded release for helm-release
+client.go:203: [debug] checking 2 resources for changes
+client.go:466: [debug] Looks like there are no changes for Service "frontend-service"
+client.go:466: [debug] Looks like there are no changes for Deployment "frontend-app-fe"
+wait.go:47: [debug] beginning wait for 2 resources with timeout of 5m0s
+upgrade.go:138: [debug] updating status for upgraded release for helm-release
+Release "helm-release" has been upgraded. Happy Helming!
+NAME: helm-release
+LAST DEPLOYED: Wed Dec 20 20:57:02 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+USER-SUPPLIED VALUES:
+EnvVariables:
+  REACT_APP_APIHOSTPORT: 10.96.1.2:80
+frontend:
+  image:
+    pullPolicy: IfNotPresent
+    repository: docker.io/hjk08/frontend
+    tag: latest
+  replicaCount: 1
+  service:
+    name: frontend-service
+    nodePort: 30080
+    port: 80
+    targetPort: 8080
+    type: NodePort
+
+COMPUTED VALUES:
+EnvVariables:
+  REACT_APP_APIHOSTPORT: 10.96.1.2:80
+frontend:
+  image:
+    pullPolicy: IfNotPresent
+    repository: docker.io/hjk08/frontend
+    tag: latest
+  replicaCount: 1
+  service:
+    name: frontend-service
+    nodePort: 30080
+    port: 80
+    targetPort: 8080
+    type: NodePort
+
+HOOKS:
+MANIFEST:
+---
+# Source: frontend-app/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: frontend-app-fe
+  name: frontend-service
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 30080
+  selector:
+    app: frontend-app-fe
+  type: NodePort
+---
+# Source: frontend-app/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend-app-fe
+  name: frontend-app-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app-fe
+  template:
+    metadata:
+      labels:
+        app: frontend-app-fe
+    spec:
+      containers:
+        - name: frontend
+          image: "docker.io/hjk08/frontend:latest"
+          ports:
+            - containerPort: 30080
+          env:
+            - name: REACT_APP_APIHOSTPORT
+              value: "10.96.1.2:80"
+
+NOTES:
+Ďakujeme za inštaláciu frontend-app !
+
+Vaša aplikácia bola nainštalovaná. Na začiatok postupujte podľa nasledujúcich krokov:
+
+1. Získajte IP adresu vášho Kubernetes klastra:
+
+   kubectl cluster-info
+
+2. Pripojenie FE:
+
+   <adresa clustera>:30080
+
+   //platí ak ste tento port nemenili

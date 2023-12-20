@@ -1,0 +1,23 @@
++ '[' false '=' true ]
++ '[' false '=' true ]
++ '[' false '=' true ]
++ CHECKOUT_DIR=/workspace/output/
++ '[' true '=' true ]
++ cleandir
++ '[' -d /workspace/output/ ]
++ rm -rf '/workspace/output//*'
++ rm -rf '/workspace/output//.[!.]*'
++ rm -rf '/workspace/output//..?*'
++ test -z 
++ test -z 
++ test -z 
++ /ko-app/git-init '-url=https://github.com/hjk08/Semstralna_praca_ONPK.git' '-revision=' '-refspec=' '-path=/workspace/output/' '-sslVerify=true' '-submodules=true' '-depth=1' '-sparseCheckoutDirectories='
+{"level":"info","ts":1703106326.330583,"caller":"git/git.go:170","msg":"Successfully cloned https://github.com/hjk08/Semstralna_praca_ONPK.git @ 24334d7ca8bab149334e7e5068a1d2ee4fd89455 (grafted, HEAD) in path /workspace/output/"}
+{"level":"info","ts":1703106326.3660986,"caller":"git/git.go:208","msg":"Successfully initialized and updated submodules in path /workspace/output/"}
++ cd /workspace/output/
++ git rev-parse HEAD
++ RESULT_SHA=24334d7ca8bab149334e7e5068a1d2ee4fd89455
++ EXIT_CODE=0
++ '[' 0 '!=' 0 ]
++ printf '%s' 24334d7ca8bab149334e7e5068a1d2ee4fd89455
++ printf '%s' https://github.com/hjk08/Semstralna_praca_ONPK.git

@@ -1,0 +1,955 @@
+current installed helm releases
+NAME        	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART             	APP VERSION
+helm-release	default  	2       	2023-12-20 20:57:02.405576691 +0000 UTC	deployed	frontend-app-1.0.0	1.0.0      
+installing helm chart...
+history.go:56: [debug] getting history for release helm-release
+upgrade.go:123: [debug] preparing upgrade for helm-release
+upgrade.go:131: [debug] performing update for helm-release
+upgrade.go:303: [debug] creating upgraded release for helm-release
+client.go:203: [debug] checking 8 resources for changes
+client.go:224: [debug] Created a new ServiceAccount called "helm-release-mongodb" in default
+
+client.go:224: [debug] Created a new ConfigMap called "helm-release-mongodb-common-scripts" in default
+
+client.go:224: [debug] Created a new ConfigMap called "helm-release-mongodb-init-scripts" in default
+
+client.go:224: [debug] Created a new Service called "helm-release-mongodb" in default
+
+client.go:224: [debug] Created a new Service called "backend-service-nodeport" in default
+
+client.go:224: [debug] Created a new Service called "backend-service-clusterip" in default
+
+client.go:224: [debug] Created a new Deployment called "helm-release-mongodb" in default
+
+client.go:224: [debug] Created a new Deployment called "backend-app-be" in default
+
+client.go:252: [debug] Deleting "frontend-service" in default...
+client.go:252: [debug] Deleting "frontend-app-fe" in default...
+wait.go:47: [debug] beginning wait for 8 resources with timeout of 5m0s
+ready.go:277: [debug] Deployment is not ready: default/helm-release-mongodb. 0 out of 1 expected pods are ready
+ready.go:277: [debug] Deployment is not ready: default/helm-release-mongodb. 0 out of 1 expected pods are ready
+ready.go:277: [debug] Deployment is not ready: default/helm-release-mongodb. 0 out of 1 expected pods are ready
+ready.go:277: [debug] Deployment is not ready: default/helm-release-mongodb. 0 out of 1 expected pods are ready
+ready.go:277: [debug] Deployment is not ready: default/helm-release-mongodb. 0 out of 1 expected pods are ready
+ready.go:277: [debug] Deployment is not ready: default/helm-release-mongodb. 0 out of 1 expected pods are ready
+upgrade.go:138: [debug] updating status for upgraded release for helm-release
+Release "helm-release" has been upgraded. Happy Helming!
+NAME: helm-release
+LAST DEPLOYED: Wed Dec 20 21:05:35 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 3
+TEST SUITE: None
+USER-SUPPLIED VALUES:
+EnvVariables:
+  MONGO_CONN_STR: mongodb://10.96.1.1:27017/platformsdb
+  MONGO_PASSWORD: password
+  MONGO_USERNAME: admin
+backend:
+  image:
+    pullPolicy: IfNotPresent
+    repository: docker.io/hjk08/backend
+    tag: latest
+  replicaCount: 1
+  serviceClusterIP:
+    clusterIP: 10.96.1.2
+    name: backend-service-clusterip
+    port: 80
+    targetPort: 9080
+    type: ClusterIP
+  serviceNodePort:
+    name: backend-service-nodeport
+    nodePort: 30090
+    port: 80
+    targetPort: 9080
+    type: NodePort
+mongodb:
+  auth:
+    enabled: false
+  enabled: true
+  image:
+    tag: 4.4.15-debian-10-r8
+  initdbScripts:
+    init_script.js: "db = db.getSiblingDB(\"platformsdb\");\ndb.createUser({\n  user:
+      \"admin\",\n  pwd: \"password\",\n  roles:[{role: \"readWrite\" , db:\"platformsdb\"}]\n});\ndb.createCollection(\"platforms\");\ndb.platforms.insertMany(\n
+      [\n   {\n        \"name\": \"openshift\",\n        \"codedetail\": {\n            \"usecase\":
+      \"Container platform\",\n            \"rank\": 12,\n            \"homepage\":
+      \"https://openshift.com\",\n            \"download\": \"https://developers.redhat.com/products/codeready-containers/overview\",\n
+      \           \"votes\": 0\n        }\n    },\n    {\n        \"name\": \"kubernetes\",\n
+      \       \"codedetail\": {\n            \"usecase\": \"Container orchestration
+      platform \",\n            \"rank\": 38,\n           \"homepage\": \"https://kubernetes.com\",\n
+      \           \"download\": \"https://kubernetes.io/docs/tasks/tools/install-minikube/\",\n
+      \           \"votes\": 0\n        }\n    },\n    {\n        \"name\": \"rancher\",\n
+      \       \"codedetail\": {\n            \"usecase\": \"Container platform management
+      \",\n            \"rank\": 50,\n            \"homepage\": \"https://rancher.com/\",\n
+      \           \"download\": \"https://github.com/rancher/rancher\",\n            \"votes\":
+      0\n        }\n     }\n  ]    \n);\n"
+  persistence:
+    enabled: false
+  service:
+    clusterIP: 10.96.1.1
+
+COMPUTED VALUES:
+EnvVariables:
+  MONGO_CONN_STR: mongodb://10.96.1.1:27017/platformsdb
+  MONGO_PASSWORD: password
+  MONGO_USERNAME: admin
+backend:
+  image:
+    pullPolicy: IfNotPresent
+    repository: docker.io/hjk08/backend
+    tag: latest
+  replicaCount: 1
+  serviceClusterIP:
+    clusterIP: 10.96.1.2
+    name: backend-service-clusterip
+    port: 80
+    targetPort: 9080
+    type: ClusterIP
+  serviceNodePort:
+    name: backend-service-nodeport
+    nodePort: 30090
+    port: 80
+    targetPort: 9080
+    type: NodePort
+mongodb:
+  affinity: {}
+  annotations: {}
+  arbiter:
+    affinity: {}
+    annotations: {}
+    args: []
+    command: []
+    configuration: ""
+    containerPorts:
+      mongodb: 27017
+    containerSecurityContext:
+      enabled: true
+      runAsNonRoot: true
+      runAsUser: 1001
+    customLivenessProbe: {}
+    customReadinessProbe: {}
+    customStartupProbe: {}
+    enabled: true
+    existingConfigmap: ""
+    extraEnvVars: []
+    extraEnvVarsCM: ""
+    extraEnvVarsSecret: ""
+    extraFlags: []
+    extraVolumeMounts: []
+    extraVolumes: []
+    hostAliases: []
+    initContainers: []
+    labels: {}
+    lifecycleHooks: {}
+    livenessProbe:
+      enabled: true
+      failureThreshold: 6
+      initialDelaySeconds: 30
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+    nodeAffinityPreset:
+      key: ""
+      type: ""
+      values: []
+    nodeSelector: {}
+    pdb:
+      create: false
+      maxUnavailable: ""
+      minAvailable: 1
+    podAffinityPreset: ""
+    podAnnotations: {}
+    podAntiAffinityPreset: soft
+    podLabels: {}
+    podManagementPolicy: OrderedReady
+    podSecurityContext:
+      enabled: true
+      fsGroup: 1001
+      sysctls: []
+    priorityClassName: ""
+    readinessProbe:
+      enabled: true
+      failureThreshold: 6
+      initialDelaySeconds: 5
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+    resources:
+      limits: {}
+      requests: {}
+    runtimeClassName: ""
+    schedulerName: ""
+    service:
+      annotations: {}
+      extraPorts: []
+      nameOverride: ""
+      ports:
+        mongodb: 27017
+    sidecars: []
+    startupProbe:
+      enabled: false
+      failureThreshold: 30
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    terminationGracePeriodSeconds: ""
+    tolerations: []
+    topologySpreadConstraints: []
+    updateStrategy:
+      type: RollingUpdate
+  architecture: standalone
+  args: []
+  auth:
+    database: ""
+    databases: []
+    enabled: false
+    existingSecret: ""
+    password: ""
+    passwords: []
+    replicaSetKey: ""
+    rootPassword: ""
+    rootUser: root
+    username: ""
+    usernames: []
+  clusterDomain: cluster.local
+  command: []
+  common:
+    exampleValue: common-chart
+    global:
+      imagePullSecrets: []
+      imageRegistry: ""
+      namespaceOverride: ""
+      storageClass: ""
+  commonAnnotations: {}
+  commonLabels: {}
+  configuration: ""
+  containerPorts:
+    mongodb: 27017
+  containerSecurityContext:
+    enabled: true
+    runAsNonRoot: true
+    runAsUser: 1001
+  customLivenessProbe: {}
+  customReadinessProbe: {}
+  customStartupProbe: {}
+  diagnosticMode:
+    args:
+    - infinity
+    command:
+    - sleep
+    enabled: false
+  directoryPerDB: false
+  disableJavascript: false
+  disableSystemLog: false
+  enableIPv6: false
+  enableJournal: true
+  enabled: true
+  existingConfigmap: ""
+  externalAccess:
+    autoDiscovery:
+      enabled: false
+      image:
+        digest: ""
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/kubectl
+        tag: 1.25.4-debian-11-r1
+      resources:
+        limits: {}
+        requests: {}
+    enabled: false
+    hidden:
+      enabled: false
+      service:
+        annotations: {}
+        domain: ""
+        externalTrafficPolicy: Local
+        extraPorts: []
+        loadBalancerClass: ""
+        loadBalancerIPs: []
+        loadBalancerSourceRanges: []
+        nodePorts: []
+        portName: mongodb
+        ports:
+          mongodb: 27017
+        sessionAffinity: None
+        sessionAffinityConfig: {}
+        type: LoadBalancer
+    service:
+      annotations: {}
+      domain: ""
+      externalTrafficPolicy: Local
+      extraPorts: []
+      loadBalancerClass: ""
+      loadBalancerIPs: []
+      loadBalancerSourceRanges: []
+      nodePorts: []
+      portName: mongodb
+      ports:
+        mongodb: 27017
+      sessionAffinity: None
+      sessionAffinityConfig: {}
+      type: LoadBalancer
+  extraDeploy: []
+  extraEnvVars: []
+  extraEnvVarsCM: ""
+  extraEnvVarsSecret: ""
+  extraFlags: []
+  extraVolumeMounts: []
+  extraVolumes: []
+  fullnameOverride: ""
+  global:
+    imagePullSecrets: []
+    imageRegistry: ""
+    namespaceOverride: ""
+    storageClass: ""
+  hidden:
+    affinity: {}
+    annotations: {}
+    args: []
+    command: []
+    configuration: ""
+    containerPorts:
+      mongodb: 27017
+    containerSecurityContext:
+      enabled: true
+      runAsNonRoot: true
+      runAsUser: 1001
+    customLivenessProbe: {}
+    customReadinessProbe: {}
+    customStartupProbe: {}
+    enabled: false
+    existingConfigmap: ""
+    extraEnvVars: []
+    extraEnvVarsCM: ""
+    extraEnvVarsSecret: ""
+    extraFlags: []
+    extraVolumeMounts: []
+    extraVolumes: []
+    hostAliases: []
+    initContainers: []
+    labels: {}
+    lifecycleHooks: {}
+    livenessProbe:
+      enabled: true
+      failureThreshold: 6
+      initialDelaySeconds: 30
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+    nodeAffinityPreset:
+      key: ""
+      type: ""
+      values: []
+    nodeSelector: {}
+    pdb:
+      create: false
+      maxUnavailable: ""
+      minAvailable: 1
+    persistence:
+      accessModes:
+      - ReadWriteOnce
+      annotations: {}
+      enabled: true
+      medium: ""
+      mountPath: /bitnami/mongodb
+      size: 8Gi
+      storageClass: ""
+      subPath: ""
+      volumeClaimTemplates:
+        dataSource: {}
+        requests: {}
+        selector: {}
+    podAffinityPreset: ""
+    podAnnotations: {}
+    podAntiAffinityPreset: soft
+    podLabels: {}
+    podManagementPolicy: OrderedReady
+    podSecurityContext:
+      enabled: true
+      fsGroup: 1001
+      sysctls: []
+    priorityClassName: ""
+    readinessProbe:
+      enabled: true
+      failureThreshold: 6
+      initialDelaySeconds: 5
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+    replicaCount: 1
+    resources:
+      limits: {}
+      requests: {}
+    runtimeClassName: ""
+    schedulerName: ""
+    service:
+      annotations: {}
+      extraPorts: []
+      portName: mongodb
+      ports:
+        mongodb: 27017
+    sidecars: []
+    startupProbe:
+      enabled: false
+      failureThreshold: 30
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    terminationGracePeriodSeconds: ""
+    tolerations: []
+    topologySpreadConstraints: []
+    updateStrategy:
+      type: RollingUpdate
+  hostAliases: []
+  image:
+    debug: false
+    digest: ""
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    registry: docker.io
+    repository: bitnami/mongodb
+    tag: 4.4.15-debian-10-r8
+  initContainers: []
+  initdbScripts:
+    init_script.js: "db = db.getSiblingDB(\"platformsdb\");\ndb.createUser({\n  user:
+      \"admin\",\n  pwd: \"password\",\n  roles:[{role: \"readWrite\" , db:\"platformsdb\"}]\n});\ndb.createCollection(\"platforms\");\ndb.platforms.insertMany(\n
+      [\n   {\n        \"name\": \"openshift\",\n        \"codedetail\": {\n            \"usecase\":
+      \"Container platform\",\n            \"rank\": 12,\n            \"homepage\":
+      \"https://openshift.com\",\n            \"download\": \"https://developers.redhat.com/products/codeready-containers/overview\",\n
+      \           \"votes\": 0\n        }\n    },\n    {\n        \"name\": \"kubernetes\",\n
+      \       \"codedetail\": {\n            \"usecase\": \"Container orchestration
+      platform \",\n            \"rank\": 38,\n           \"homepage\": \"https://kubernetes.com\",\n
+      \           \"download\": \"https://kubernetes.io/docs/tasks/tools/install-minikube/\",\n
+      \           \"votes\": 0\n        }\n    },\n    {\n        \"name\": \"rancher\",\n
+      \       \"codedetail\": {\n            \"usecase\": \"Container platform management
+      \",\n            \"rank\": 50,\n            \"homepage\": \"https://rancher.com/\",\n
+      \           \"download\": \"https://github.com/rancher/rancher\",\n            \"votes\":
+      0\n        }\n     }\n  ]    \n);\n"
+  initdbScriptsConfigMap: ""
+  kubeVersion: ""
+  labels: {}
+  lifecycleHooks: {}
+  livenessProbe:
+    enabled: true
+    failureThreshold: 6
+    initialDelaySeconds: 30
+    periodSeconds: 20
+    successThreshold: 1
+    timeoutSeconds: 10
+  metrics:
+    args: []
+    command: []
+    containerPort: 9216
+    customLivenessProbe: {}
+    customReadinessProbe: {}
+    customStartupProbe: {}
+    enabled: false
+    extraFlags: ""
+    image:
+      digest: ""
+      pullPolicy: IfNotPresent
+      pullSecrets: []
+      registry: docker.io
+      repository: bitnami/mongodb-exporter
+      tag: 0.35.0-debian-11-r4
+    livenessProbe:
+      enabled: true
+      failureThreshold: 3
+      initialDelaySeconds: 15
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 5
+    password: ""
+    prometheusRule:
+      additionalLabels: {}
+      enabled: false
+      namespace: ""
+      rules: []
+    readinessProbe:
+      enabled: true
+      failureThreshold: 3
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits: {}
+      requests: {}
+    service:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: '{{ .Values.metrics.service.ports.metrics }}'
+        prometheus.io/scrape: "true"
+      extraPorts: []
+      ports:
+        metrics: 9216
+      type: ClusterIP
+    serviceMonitor:
+      enabled: false
+      honorLabels: false
+      interval: 30s
+      jobLabel: ""
+      labels: {}
+      metricRelabelings: []
+      namespace: ""
+      relabelings: []
+      scrapeTimeout: ""
+      selector: {}
+    startupProbe:
+      enabled: false
+      failureThreshold: 30
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    username: ""
+  nameOverride: ""
+  namespaceOverride: ""
+  nodeAffinityPreset:
+    key: ""
+    type: ""
+    values: []
+  nodeSelector: {}
+  pdb:
+    create: false
+    maxUnavailable: ""
+    minAvailable: 1
+  persistence:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: false
+    existingClaim: ""
+    medium: ""
+    mountPath: /bitnami/mongodb
+    resourcePolicy: ""
+    size: 8Gi
+    storageClass: ""
+    subPath: ""
+    volumeClaimTemplates:
+      dataSource: {}
+      requests: {}
+      selector: {}
+  podAffinityPreset: ""
+  podAnnotations: {}
+  podAntiAffinityPreset: soft
+  podLabels: {}
+  podManagementPolicy: OrderedReady
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+    sysctls: []
+  podSecurityPolicy:
+    allowPrivilegeEscalation: false
+    create: false
+    privileged: false
+    spec: {}
+  priorityClassName: ""
+  rbac:
+    create: false
+    rules: []
+  readinessProbe:
+    enabled: true
+    failureThreshold: 6
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  replicaCount: 2
+  replicaSetConfigurationSettings:
+    configuration: {}
+    enabled: false
+  replicaSetHostnames: true
+  replicaSetName: rs0
+  resources:
+    limits: {}
+    requests: {}
+  runtimeClassName: ""
+  schedulerName: ""
+  service:
+    annotations: {}
+    clusterIP: 10.96.1.1
+    externalIPs: []
+    externalTrafficPolicy: Local
+    extraPorts: []
+    loadBalancerClass: ""
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: []
+    nameOverride: ""
+    nodePorts:
+      mongodb: ""
+    portName: mongodb
+    ports:
+      mongodb: 27017
+    sessionAffinity: None
+    sessionAffinityConfig: {}
+    type: ClusterIP
+  serviceAccount:
+    annotations: {}
+    automountServiceAccountToken: true
+    create: true
+    name: ""
+  sidecars: []
+  startupProbe:
+    enabled: false
+    failureThreshold: 30
+    initialDelaySeconds: 5
+    periodSeconds: 20
+    successThreshold: 1
+    timeoutSeconds: 10
+  systemLogVerbosity: 0
+  terminationGracePeriodSeconds: ""
+  tls:
+    arbiter:
+      existingSecret: ""
+    autoGenerated: true
+    caCert: ""
+    caKey: ""
+    enabled: false
+    existingSecret: ""
+    extraDnsNames: []
+    hidden:
+      existingSecrets: []
+    image:
+      digest: ""
+      pullPolicy: IfNotPresent
+      pullSecrets: []
+      registry: docker.io
+      repository: bitnami/nginx
+      tag: 1.23.2-debian-11-r9
+    mode: requireTLS
+    replicaset:
+      existingSecrets: []
+    resources:
+      limits: {}
+      requests: {}
+    standalone:
+      existingSecret: ""
+  tolerations: []
+  topologySpreadConstraints: []
+  updateStrategy:
+    type: RollingUpdate
+  useStatefulSet: false
+  volumePermissions:
+    enabled: false
+    image:
+      digest: ""
+      pullPolicy: IfNotPresent
+      pullSecrets: []
+      registry: docker.io
+      repository: bitnami/bitnami-shell
+      tag: 11-debian-11-r52
+    resources:
+      limits: {}
+      requests: {}
+    securityContext:
+      runAsUser: 0
+
+HOOKS:
+MANIFEST:
+---
+# Source: backend-app/charts/mongodb/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: helm-release-mongodb
+  namespace: "default"
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-13.4.4
+    app.kubernetes.io/instance: helm-release
+    app.kubernetes.io/managed-by: Helm
+secrets:
+  - name: helm-release-mongodb
+automountServiceAccountToken: true
+---
+# Source: backend-app/charts/mongodb/templates/common-scripts-cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-release-mongodb-common-scripts
+  namespace: "default"
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-13.4.4
+    app.kubernetes.io/instance: helm-release
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: mongodb
+data:
+  startup-probe.sh: |
+    #!/bin/bash
+    mongosh  $TLS_OPTIONS --port $MONGODB_PORT_NUMBER --eval 'db.hello().isWritablePrimary || db.hello().secondary' | grep 'true'
+  readiness-probe.sh: |
+    #!/bin/bash
+    # Run the proper check depending on the version
+    [[ $(mongod -version | grep "db version") =~ ([0-9]+\.[0-9]+\.[0-9]+) ]] && VERSION=${BASH_REMATCH[1]}
+    . /opt/bitnami/scripts/libversion.sh
+    VERSION_MAJOR="$(get_sematic_version "$VERSION" 1)"
+    VERSION_MINOR="$(get_sematic_version "$VERSION" 2)"
+    VERSION_PATCH="$(get_sematic_version "$VERSION" 3)"
+    if [[ ( "$VERSION_MAJOR" -ge 5 ) || ( "$VERSION_MAJOR" -ge 4 && "$VERSION_MINOR" -ge 4 && "$VERSION_PATCH" -ge 2 ) ]]; then
+        mongosh $TLS_OPTIONS --port $MONGODB_PORT_NUMBER --eval 'db.hello().isWritablePrimary || db.hello().secondary' | grep 'true'
+    else
+        mongosh  $TLS_OPTIONS --port $MONGODB_PORT_NUMBER --eval 'db.isMaster().ismaster || db.isMaster().secondary' | grep 'true'
+    fi
+  ping-mongodb.sh: |
+    #!/bin/bash
+    mongosh  $TLS_OPTIONS --port $MONGODB_PORT_NUMBER --eval "db.adminCommand('ping')"
+---
+# Source: backend-app/charts/mongodb/templates/initialization-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-release-mongodb-init-scripts
+  namespace: "default"
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-13.4.4
+    app.kubernetes.io/instance: helm-release
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: mongodb
+data:
+  init_script.js: "db = db.getSiblingDB(\"platformsdb\");\ndb.createUser({\n  user:
+    \"admin\",\n  pwd: \"password\",\n  roles:[{role: \"readWrite\" , db:\"platformsdb\"}]\n});\ndb.createCollection(\"platforms\");\ndb.platforms.insertMany(\n
+    [\n   {\n        \"name\": \"openshift\",\n        \"codedetail\": {\n            \"usecase\":
+    \"Container platform\",\n            \"rank\": 12,\n            \"homepage\": \"https://openshift.com\",\n
+    \           \"download\": \"https://developers.redhat.com/products/codeready-containers/overview\",\n
+    \           \"votes\": 0\n        }\n    },\n    {\n        \"name\": \"kubernetes\",\n
+    \       \"codedetail\": {\n            \"usecase\": \"Container orchestration platform
+    \",\n            \"rank\": 38,\n           \"homepage\": \"https://kubernetes.com\",\n
+    \           \"download\": \"https://kubernetes.io/docs/tasks/tools/install-minikube/\",\n
+    \           \"votes\": 0\n        }\n    },\n    {\n        \"name\": \"rancher\",\n
+    \       \"codedetail\": {\n            \"usecase\": \"Container platform management
+    \",\n            \"rank\": 50,\n            \"homepage\": \"https://rancher.com/\",\n
+    \           \"download\": \"https://github.com/rancher/rancher\",\n            \"votes\":
+    0\n        }\n     }\n  ]    \n);\n"
+---
+# Source: backend-app/charts/mongodb/templates/standalone/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: helm-release-mongodb
+  namespace: "default"
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-13.4.4
+    app.kubernetes.io/instance: helm-release
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: mongodb
+spec:
+  type: ClusterIP
+  clusterIP: 10.96.1.1
+  sessionAffinity: None
+  ports:
+    - name: "mongodb"
+      port: 27017
+      targetPort: mongodb
+      nodePort: null
+  selector:
+    app.kubernetes.io/name: mongodb
+    app.kubernetes.io/instance: helm-release
+    app.kubernetes.io/component: mongodb
+---
+# Source: backend-app/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: backend-app-be
+  name: backend-service-nodeport 
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 9080
+      nodePort: 30090
+  selector: 
+    app: backend-app-be
+  type: NodePort
+---
+# Source: backend-app/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: backend-app-be
+  name: backend-service-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 9080
+  clusterIP: 10.96.1.2
+  selector:
+    app: backend-app-be
+---
+# Source: backend-app/charts/mongodb/templates/standalone/dep-sts.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm-release-mongodb
+  namespace: "default"
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-13.4.4
+    app.kubernetes.io/instance: helm-release
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: mongodb
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mongodb
+      app.kubernetes.io/instance: helm-release
+      app.kubernetes.io/component: mongodb
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mongodb
+        helm.sh/chart: mongodb-13.4.4
+        app.kubernetes.io/instance: helm-release
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/component: mongodb
+    spec:
+      
+      serviceAccountName: helm-release-mongodb
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: mongodb
+                    app.kubernetes.io/instance: helm-release
+                    app.kubernetes.io/component: mongodb
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+        sysctls: []
+      
+      containers:
+        - name: mongodb
+          image: docker.io/bitnami/mongodb:4.4.15-debian-10-r8
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "yes"
+            - name: MONGODB_SYSTEM_LOG_VERBOSITY
+              value: "0"
+            - name: MONGODB_DISABLE_SYSTEM_LOG
+              value: "no"
+            - name: MONGODB_DISABLE_JAVASCRIPT
+              value: "no"
+            - name: MONGODB_ENABLE_JOURNAL
+              value: "yes"
+            - name: MONGODB_PORT_NUMBER
+              value: "27017"
+            - name: MONGODB_ENABLE_IPV6
+              value: "no"
+            - name: MONGODB_ENABLE_DIRECTORY_PER_DB
+              value: "no"
+          ports:
+            - name: mongodb
+              containerPort: 27017
+          livenessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 10
+            exec:
+              command:
+                - /bitnami/scripts/ping-mongodb.sh
+          readinessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+            exec:
+              command:
+                - /bitnami/scripts/readiness-probe.sh
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+            - name: datadir
+              mountPath: /bitnami/mongodb
+              subPath: 
+            - name: common-scripts
+              mountPath: /bitnami/scripts
+            - name: custom-init-scripts
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: common-scripts
+          configMap:
+            name: helm-release-mongodb-common-scripts
+            defaultMode: 0550
+        - name: custom-init-scripts
+          configMap:
+            name: helm-release-mongodb-init-scripts
+        - name: datadir
+          emptyDir: {}
+---
+# Source: backend-app/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-app-be
+  name: backend-app-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-app-be
+  template:
+    metadata:
+      labels:
+        app: backend-app-be
+    spec:
+      containers:
+        - name: beck
+          image: "docker.io/hjk08/backend:latest"
+          ports:
+            - containerPort: 9080
+          env:
+            - name: MONGO_CONN_STR
+              value: "mongodb://10.96.1.1:27017/platformsdb"
+            - name: MONGO_USERNAME
+              value: "admin"
+            - name: MONGO_PASSWORD
+              value: "password"
+
+NOTES:
+Ďakujeme za inštaláciu backend-app !
+
+Vaša aplikácia bola nainštalovaná. Na začiatok postupujte podľa nasledujúcich krokov:
+
+1. Získajte IP adresu vášho Kubernetes klastra:
+
+   kubectl cluster-info
+
+2. Overenie BE:
+
+   <adresa clustera>:30090
+
+   //platí ak ste tento port nemenili

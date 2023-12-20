@@ -1,0 +1,40 @@
+[1/2] STEP 1/5: FROM docker.io/library/golang:alpine AS builder
+Trying to pull docker.io/library/golang:alpine...
+Getting image source signatures
+Copying blob sha256:cd71eff6cd957e7814c566ebb2f5295985b58b73a0701c4a2882852d3a62ef24
+Copying blob sha256:661ff4d9561e3fd050929ee5097067c34bafc523ee60f5294a37fd08056a73ca
+Copying blob sha256:2979d3ffd3a49b2dd31f3e87826cb75934ebef5c0e6e44c8ae38ead06678961d
+Copying blob sha256:f54eb9fb8c5c3cc78f71a4ef714cd1600c96d510fb6396a77fdf373551f7e5a0
+Copying config sha256:d9213efcc94a6e63913755d122d173564c238af7a41765ad9688d5506f71bf30
+Writing manifest to image destination
+[1/2] STEP 2/5: RUN mkdir /build 
+time="2023-12-20T19:17:02Z" level=warning msg="Path \"/run/secrets/etc-pki-entitlement\" from \"/etc/containers/mounts.conf\" doesn't exist, skipping"
+time="2023-12-20T19:17:02Z" level=warning msg="Path \"/run/secrets/rhsm\" from \"/etc/containers/mounts.conf\" doesn't exist, skipping"
+[1/2] STEP 3/5: ADD . /build/
+[1/2] STEP 4/5: WORKDIR /build 
+[1/2] STEP 5/5: RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main .
+time="2023-12-20T19:17:04Z" level=warning msg="Path \"/run/secrets/etc-pki-entitlement\" from \"/etc/containers/mounts.conf\" doesn't exist, skipping"
+time="2023-12-20T19:17:04Z" level=warning msg="Path \"/run/secrets/rhsm\" from \"/etc/containers/mounts.conf\" doesn't exist, skipping"
+go: downloading github.com/gorilla/mux v1.7.3
+go: downloading github.com/gorilla/handlers v1.4.2
+go: downloading go.mongodb.org/mongo-driver v1.1.1
+go: downloading github.com/go-stack/stack v1.8.0
+go: downloading github.com/golang/snappy v0.0.1
+go: downloading github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c
+go: downloading github.com/xdg/stringprep v1.0.0
+go: downloading golang.org/x/sync v0.0.0-20190423024810-112230192c58
+go: downloading golang.org/x/crypto v0.0.0-20190909091759-094676da4a83
+go: downloading golang.org/x/text v0.3.2
+[2/2] STEP 1/4: FROM scratch
+[2/2] STEP 2/4: COPY --from=builder /build/main /app/ 		 
+[2/2] STEP 3/4: WORKDIR /app
+[2/2] STEP 4/4: CMD ["./main"]
+[2/2] COMMIT hjk08/backend:latest
+--> e00bc4b8e1fa
+Successfully tagged localhost/hjk08/backend:latest
+e00bc4b8e1fabe094187614e94a4b4bc2ed181f265ff9d0907037d791882d127
+Getting image source signatures
+Copying blob sha256:0c18525dd78ab296e0df6331e40f8265450311effe66e025a20c542761d552ef
+Copying config sha256:e00bc4b8e1fabe094187614e94a4b4bc2ed181f265ff9d0907037d791882d127
+Writing manifest to image destination
+sha256:9f483a984934ba53f729d38e509acd002f4d6919dfed7137a5b89f021571e077hjk08/backend:latest
