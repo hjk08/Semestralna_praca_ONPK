@@ -1,0 +1,16 @@
+frontend:
+  replicaCount: 1
+  image:
+    repository: docker.io/hjk08/frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  service:
+    name: frontend-service
+    type: NodePort
+    port: 80
+    targetPort: 8080
+    nodePort: 30080
+
+EnvVariables:
+  REACT_APP_APIHOSTPORT: "10.96.1.2:80"

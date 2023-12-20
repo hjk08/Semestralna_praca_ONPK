@@ -1,0 +1,13 @@
+Ďakujeme za inštaláciu frontend-app !
+
+Vaša aplikácia bola nainštalovaná. Na začiatok postupujte podľa nasledujúcich krokov:
+
+1. Získajte IP adresu vášho Kubernetes klastra:
+
+   kubectl cluster-info
+
+2. Pripojenie FE:
+
+   <adresa clustera>:30080
+
+   //platí ak ste tento port nemenili
