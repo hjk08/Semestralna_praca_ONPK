@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: ci-frontend-pipeline-run-
+spec:
+  pipelineRef:
+    name: ci-frontend-pipeline
+  params:
+    - name: repo-url
+      value: 'https://github.com/hjk08/Semstralna_praca_ONPK.git'
+    - name: image-reference
+      value: 'hjk08/frontend:latest'
+    - name: dockerfile
+      value: 'docker/zauni-zadanie-appfrontend/Dockerfile'
+    - name: context
+      value: 'docker/zauni-zadanie-appfrontend'
+  workspaces:
+    - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+    - name: docker-credentials
+      secret:
+        secretName: docker-credentials

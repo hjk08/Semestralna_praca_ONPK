@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: cd-backend-pipeline-run-
+spec:
+  pipelineRef:
+    name: cd-backend-pipeline
+  params:
+    - name: gitRepoUrl
+      value: "https://github.com/hjk08/Semstralna_praca_ONPK.git"
+    - name: helmChartPath
+      value: "charts/BE/backend-app-1.0.0.tgz"
+    - name: releaseName
+      value: "backend-app"
+    - name: chartsDir
+      value: "charts/BE" 
+  workspaces:
+    - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi

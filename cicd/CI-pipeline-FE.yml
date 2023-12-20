@@ -1,0 +1,48 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: ci-frontend-pipeline
+spec:
+  params:
+    - name: repo-url
+      type: string
+    - name: image-reference
+      type: string
+    - name: dockerfile
+      type: string
+    - name: context
+      type: string
+  workspaces:
+    - name: shared-data
+    - name: docker-credentials
+  tasks:
+    - name: fetch-source
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: main
+      workspaces:
+        - name: output
+          workspace: shared-data
+    - name: build-and-push
+      taskRef:
+        name: buildah
+      runAfter:
+        - fetch-source
+      params:
+        - name: IMAGE
+          value: $(params.image-reference)
+        - name: DOCKERFILE
+          value: $(params.dockerfile)
+        - name: CONTEXT
+          value: $(params.context)
+        - name: TLSVERIFY
+          value: "false"
+      workspaces:
+        - name: source
+          workspace: shared-data
+        - name: dockerconfig
+          workspace: docker-credentials

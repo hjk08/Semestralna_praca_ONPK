@@ -1,0 +1,42 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: cd-frontend-pipeline
+spec:
+  params:
+    - name: gitRepoUrl
+      type: string
+    - name: helmChartPath
+      type: string
+    - name: releaseName
+      type: string
+    - name: chartsDir
+      type: string
+  workspaces:
+    - name: shared-data
+  tasks:
+    - name: clone-repo
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: $(params.gitRepoUrl)
+      workspaces:
+        - name: output
+          workspace: shared-data
+
+    - name: deploy-frontend
+      taskRef:
+        name: helm-upgrade-from-source
+      params:
+        - name: chartPath
+          value: $(params.helmChartPath)
+        - name: releaseName
+          value: $(params.releaseName)
+        - name: charts_dir
+          value: $(params.chartsDir)
+      runAfter:
+        - clone-repo
+      workspaces:
+        - name: source
+          workspace: shared-data

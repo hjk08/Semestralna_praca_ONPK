@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: cd-frontend-pipeline-run-
+spec:
+  pipelineRef:
+    name: cd-frontend-pipeline
+  params:
+    - name: gitRepoUrl
+      value: "https://github.com/hjk08/Semstralna_praca_ONPK.git"
+    - name: helmChartPath
+      value: "charts/FE/frontend-app-1.0.0.tgz"
+    - name: releaseName
+      value: "frontend-app"
+    - name: chartsDir
+      value: "charts/FE" 
+  workspaces:
+    - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
