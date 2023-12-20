@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Chart.Name }}-be
+  name: {{ .Chart.Name }}-be
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-be
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-be
+    spec:
+      containers:
+        - name: beck
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          ports:
+            - containerPort: 9080
+          env:
+            - name: MONGO_CONN_STR
+              value: "{{ .Values.EnvVariables.MONGO_CONN_STR }}"
+            - name: MONGO_USERNAME
+              value: "{{ .Values.EnvVariables.MONGO_USERNAME }}"
+            - name: MONGO_PASSWORD
+              value: "{{ .Values.EnvVariables.MONGO_PASSWORD }}"

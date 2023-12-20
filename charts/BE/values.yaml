@@ -1,0 +1,94 @@
+backend:
+  replicaCount: 1
+  image:
+    repository: docker.io/hjk08/backend
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  serviceNodePort:
+    name: backend-service-nodeport
+    type: NodePort
+    port: 80
+    targetPort: 9080
+    nodePort: 30090
+  
+  serviceClusterIP:
+    name: backend-service-clusterip
+    type: ClusterIP
+    port: 80
+    targetPort: 9080
+    clusterIP: "10.96.1.2"
+
+mongodb:
+  enabled: true
+  auth:
+    enabled: false
+  service:
+    clusterIP: "10.96.1.1"
+  image:
+    tag: "4.4.15-debian-10-r8"
+  persistence:
+    enabled: false
+  initdbScripts:
+     init_script.js: |
+       db = db.getSiblingDB("platformsdb");
+       db.createUser({
+         user: "admin",
+         pwd: "password",
+         roles:[{role: "readWrite" , db:"platformsdb"}]
+       });
+       db.createCollection("platforms");
+       db.platforms.insertMany(
+  image:
+    tag: "4.4.15-debian-10-r8"
+  persistence:
+    enabled: false
+  initdbScripts:
+     init_script.js: |
+       db = db.getSiblingDB("platformsdb");
+       db.createUser({
+         user: "admin",
+         pwd: "password",
+         roles:[{role: "readWrite" , db:"platformsdb"}]
+       });
+       db.createCollection("platforms");
+       db.platforms.insertMany(
+        [
+          {
+               "name": "openshift",
+               "codedetail": {
+                   "usecase": "Container platform",
+                   "rank": 12,
+                   "homepage": "https://openshift.com",
+                   "download": "https://developers.redhat.com/products/codeready-containers/overview",
+                   "votes": 0
+               }
+           },
+           {
+               "name": "kubernetes",
+               "codedetail": {
+                   "usecase": "Container orchestration platform ",
+                   "rank": 38,
+                  "homepage": "https://kubernetes.com",
+                   "download": "https://kubernetes.io/docs/tasks/tools/install-minikube/",
+                   "votes": 0
+               }
+           },
+           {
+               "name": "rancher",
+               "codedetail": {
+                   "usecase": "Container platform management ",
+                   "rank": 50,
+                   "homepage": "https://rancher.com/",
+                   "download": "https://github.com/rancher/rancher",
+                   "votes": 0
+               }
+            }
+         ]    
+       );
+
+EnvVariables:
+  MONGO_CONN_STR: "mongodb://10.96.1.1:27017/platformsdb"
+  MONGO_USERNAME: "admin"
+  MONGO_PASSWORD: "password"
+
